@@ -1,3 +1,137 @@
 body {
     font-family: 'Yoster', 'DOSMyungjo';
+    cursor: url('/assets/icon/cursor.svg'), default;
+}
+
+html {
+    font-size: calc(100vw / 1920 * 20);
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.subtitle {
+    color: white;
+    font-size: var(--font-size-2xl);
+}
+
+#startScreen {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--color-primary);
+    display: flex;
+}
+
+.folder-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.folder {
+    position: relative;
+    transform: translateY(-8%);
+    width: 40%;
+    aspect-ratio: 1448 / 1000;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.folder:hover {
+    transform: translateY(-8%) scale(1.02);
+}
+
+.folder-base, .folder-top {
+    position: absolute;
+    width: 100%;
+    height: auto;
+} 
+
+.folder-base {
+    z-index: 1;
+}
+
+.title {
+    position: absolute;
+    z-index: 2;
+    top: -12%;
+    left: -44%;
+    width: 180%;
+    height: auto;
+    transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.title.slide-right {
+    transform: translate(10%, -5%);
+}
+
+.title.slide-out {
+    transform: translate(-150%, 90%);
+}
+
+.folder-container {
+    perspective: 1200px;
+  }
+  
+.folder-top {
+    z-index: 4;
+    top: 20%;
+    left: 4%;
+    transform-origin: bottom left;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+  
+.folder-top.opening {
+    transform: skewX(-20deg) scaleX(0.87);
+}
+
+.folder-content {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    width: 30%;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    z-index: 3;
+    transition: 
+        transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
+        border-radius 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 1.2s ease-in-out;
+    background: var(--color-blue-dark);
+}
+
+.folder-content.opening {
+    transform: translateY(-150%);
+}
+  
+.folder-content.expanding {
+    transform: scale(30);
+    border-radius: 0;
+    background-color: white;
+    z-index: 5;
+}
+
+.content-container {
+    overflow: scroll;
+}
+
+#mainScreen {
+    display: none;
 }
