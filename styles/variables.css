@@ -17,6 +17,8 @@
 :root {
     --color-primary: #367D7F;
 
+    --font-size-2xl: 4rem;
+    --font-size-xl: 2.5rem;
     --font-size-lg: 1.75rem;
     --font-size-md: 1.5rem;
     --font-size-sm: 1.25rem;
@@ -26,4 +28,5 @@
     --color-gray-light: #D9D9D9;
 
     --color-blue-dark: #02178E;
+    --color-blue-light: #0E78C8;
 }
