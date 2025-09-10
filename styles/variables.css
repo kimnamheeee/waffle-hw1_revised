@@ -13,3 +13,17 @@
     font-style: normal;
     font-display: swap;
 }
+
+:root {
+    --color-primary: #367D7F;
+
+    --font-size-lg: 1.75rem;
+    --font-size-md: 1.5rem;
+    --font-size-sm: 1.25rem;
+
+    --color-gray-dark: #878787;
+    --color-gray-md: #C3C3C3;
+    --color-gray-light: #D9D9D9;
+
+    --color-blue-dark: #02178E;
+}
