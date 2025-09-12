@@ -32,7 +32,7 @@ html {
 
 #startScreen {
     padding: 1.5rem;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: var(--color-primary);
@@ -126,6 +126,10 @@ html {
     border-radius: 0;
     background-color: white;
     z-index: 5;
+    transition: 
+        transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
+        border-radius 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 1.8s ease-in-out;
 }
 
 .content-container {
@@ -133,8 +137,14 @@ html {
 }
 
 #mainScreen {
-    display: flex;
+    display: none;
     background-color: white;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#mainScreen.fade-in {
+    opacity: 1;
 }
 
 .content-header {
@@ -235,6 +245,7 @@ a:hover {
     color: var(--color-gray-md);
     font-size: 1.2rem;
     margin: 4rem 0;
+    padding: 4rem 0;
 }
   
 .divider::before {
@@ -337,3 +348,65 @@ a:hover {
     width: 8rem;
     height: 8rem;
 }
+
+.contact-title {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-title-text {
+    font-size: var(--font-size-xl);
+}
+
+.contact-title-description {
+    font-size: var(--font-size-sm);
+}
+
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.contact-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.contact-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.contact-list-item-icon {
+    width: 8rem;
+    height: 8rem;
+}
+
+.contact-list-text {
+    font-size: var(--font-size-sm);
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-md);
+    border-top: 1px solid var(--color-gray-md);
+    margin-top: 3rem;
+  }
+
+  .content-header-title {
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .section-divider {
+    transition: margin 0.6s ease-in-out, transform 0.6s ease-in-out;
+  }
+  
