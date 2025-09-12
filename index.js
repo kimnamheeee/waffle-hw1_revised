@@ -4,6 +4,7 @@ const titleElement = document.querySelector('.title');
 const folderTop = document.querySelector('.folder-top');
 const folderContent = document.querySelector('.folder-content');
 const draggableAnimal = document.getElementById('draggableAnimal');
+const mainScreen = document.getElementById('mainScreen');
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -34,8 +35,14 @@ async function openWindow() {
     folderContent.classList.add('expanding');
 
     await delay(ANIMATION_DELAY.FINISH - ANIMATION_DELAY.CONTENT_EXPAND);
-    startScreen.style.display = 'none';
+    
     mainScreen.style.display = 'flex';
+    
+    await delay(20);
+    mainScreen.classList.add('fade-in');
+    
+    await delay(400);
+    startScreen.style.display = 'none';
 }
 
 function makeDraggable(element) {
@@ -83,10 +90,78 @@ function makeDraggable(element) {
     }
 }
 
+function autoMoveUntilDragged(element) {
+
+  let dx = 2.5;
+  let dy = 2.0;
+  let intervalId = null;
+  let hasBeenDragged = false;
+
+  function move() {
+    if (hasBeenDragged) return;
+
+    const rect = element.getBoundingClientRect();
+    let x = parseFloat(element.style.left || 100);
+    let y = parseFloat(element.style.top || 100);
+
+    x += dx;
+    y += dy;
+
+    if (x <= 0 || x + rect.width >= window.innerWidth) dx *= -1;
+    if (y <= 0 || y + rect.height >= window.innerHeight) dy *= -1;
+
+    if (dx > 0) {
+      element.style.transform = "scaleX(-1)";
+    } else {
+      element.style.transform = "scaleX(1)";
+    }
+
+    element.style.left = `${x}px`;
+    element.style.top = `${y}px`;
+  }
+
+  intervalId = setInterval(move, 20);
+
+  element.addEventListener("pointerdown", () => {
+    hasBeenDragged = true;
+    clearInterval(intervalId);
+  });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      document.body.innerHTML = `
+        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;font-size:5rem;text-align:center;">
+          <h1>모바일 접속은 지원하지 않습니다.</h1>
+          <p>PC에서 접속해 주세요!</p>
+        </div>
+      `;
+    }
     mainFolder.addEventListener('click', openWindow);
 
     if (draggableAnimal) {
         makeDraggable(draggableAnimal);
+        autoMoveUntilDragged(draggableAnimal);
     }
+    
+    document.querySelectorAll('.content-header-nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        const headerHeight = document.querySelector('.content-header').offsetHeight;
+    
+        const container = document.querySelector('.content-container');
+        const elementPosition = targetElement.offsetTop;
+        const offsetPosition = elementPosition - headerHeight;
+    
+        container.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      });
+    });
 });
