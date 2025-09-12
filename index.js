@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isMobile) {
       document.body.innerHTML = `
-        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;font-size:5rem;text-align:center;">
+        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:80vh;font-size:5rem;text-align:center;">
           <h1>모바일 접속은 지원하지 않습니다.</h1>
           <p>PC에서 접속해 주세요!</p>
         </div>
